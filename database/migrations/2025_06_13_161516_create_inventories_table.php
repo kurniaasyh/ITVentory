@@ -13,14 +13,16 @@ return new class extends Migration
      */
     public function up()
 {
+    // inventories migration
     Schema::create('inventories', function (Blueprint $table) {
-        $table->id();
+        $table->id('inventory_id'); // primary key diubah
         $table->string('name');
         $table->string('code');
         $table->integer('total');
-        $table->enum('status', ['Tersedia', 'Kosong']);
+        $table->string('status');
         $table->timestamps();
     });
+
 }
 
 

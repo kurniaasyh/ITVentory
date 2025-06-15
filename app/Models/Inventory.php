@@ -9,17 +9,13 @@ class Inventory extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'inventory_id'; // Penting!
-
-    protected $fillable = [
-        'name',
-        'code',
-        'total',
-        'status',
-    ];
+    protected $primaryKey = 'inventory_id'; // ini WAJIB jika primary key bukan 'id'
+    public $incrementing = true;
+    protected $fillable = ['name', 'code', 'total', 'status'];
 
     public function loans()
     {
         return $this->hasMany(Loan::class, 'inventory_id');
     }
 }
+

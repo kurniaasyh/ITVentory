@@ -7,9 +7,9 @@
             @csrf
             <div style="margin-bottom: 12px;">
                 <label>Nama Alat:</label>
-                <select name="inventory_id" required>
+                <select name="inventory_id" class="form-control" required>
                     @foreach ($inventories as $inventory)
-                        <option value="{{ $inventory->id }}">
+                        <option value="{{ $inventory->inventory_id }}">
                             {{ $inventory->name }} (Stok: {{ $inventory->total }})
                         </option>
                     @endforeach
