@@ -20,6 +20,8 @@
 </head>
 <body>
 
+
+
 <div class="sidebar">
     <h2><span style="color:#007bff">IT</span>Ventory</h2>
     <a href="{{ route('dashboard') }}" class="{{ request()->is('dashboard') ? 'active' : '' }}">Dashboard</a>
@@ -29,18 +31,22 @@
 
 <div class="container">
     <div class="topbar">
-        <div></div>
-        <div>
-            <span>{{ Auth::user()->name }}</span>
-            <form method="POST" action="{{ route('logout') }}" style="display:inline;">
-                @csrf
-                <button type="submit">Logout</button>
-            </form>
-        </div>
+    <div></div>
+    <div style="display: flex; align-items: center; gap: 8px;">
+        <span>{{ Auth::user()->name }}</span>
+        <form action="{{ route('profile.edit') }}" method="GET" style="display:inline;">
+            <button type="submit">Profile</button>
+        </form>
+        <form method="POST" action="{{ route('logout') }}" style="display:inline;">
+            @csrf
+            <button type="submit">Logout</button>
+        </form>
     </div>
+</div>
 
     @yield('content')
 </div>
+
 
 </body>
 </html>
