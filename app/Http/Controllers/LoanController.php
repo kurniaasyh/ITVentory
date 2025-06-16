@@ -8,34 +8,66 @@ use Illuminate\Http\Request;
 
 class LoanController extends Controller
 {
+    public function create()
+    {
+        $inventories = Inventory::where('status', 'Tersedia')->get();
+        return view('loans.create', compact('inventories'));
+    }
+
     public function store(Request $request)
-{
-    $request->validate([
-        'inventory_id' => 'required|exists:inventories,inventory_id',
-        'quantity' => 'required|integer|min:1',
-        'borrow_date' => 'required|date',
-    ]);
+    {
+        $request->validate([
+            'inventory_id' => 'required|exists:inventories,inventory_id',
+            'quantity' => 'required|integer|min:1',
+            'borrow_date' => 'required|date',
+        ]);
 
-    $inventory = Inventory::where('inventory_id', $request->inventory_id)->firstOrFail();
+        $inventory = Inventory::where('inventory_id', $request->inventory_id)->firstOrFail();
 
-    if ($inventory->total < $request->quantity) {
-        return back()->withErrors(['quantity' => 'Stok tidak mencukupi']);
+        if ($inventory->total < $request->quantity) {
+            return back()->withErrors(['quantity' => 'Stok tidak mencukupi']);
+        }
+
+        Loan::create([
+            'inventory_id' => $request->inventory_id,
+            'quantity' => $request->quantity,
+            'borrow_date' => $request->borrow_date,
+            'status' => 'Dipinjam',
+        ]);
+
+        $inventory->total -= $request->quantity;
+        if ($inventory->total == 0) {
+            $inventory->status = 'Kosong';
+        }
+        $inventory->save();
+
+        return redirect()->route('loans.create')->with('success', 'Peminjaman berhasil');
+
     }
 
-    Loan::create([
-        'inventory_id' => $request->inventory_id,
-        'quantity' => $request->quantity,
-        'borrow_date' => $request->borrow_date,
-        'status' => 'Dipinjam',
-    ]);
-
-    $inventory->total -= $request->quantity;
-    if ($inventory->total == 0) {
-        $inventory->status = 'Kosong';
+    // ⬇ Fungsi pengembalian
+    public function returns()
+    {
+        $loans = Loan::where('status', 'Dipinjam')->get();
+        return view('loans.returns', compact('loans'));
     }
-    $inventory->save();
 
-    return redirect()->back()->with('success', 'Peminjaman berhasil');
-}
+    public function returnLoan(Request $request, Loan $loan)
+    {
+        $request->validate([
+            'return_date' => 'required|date',
+        ]);
 
+        $loan->return_date = $request->return_date;
+        $loan->status = 'Dikembalikan';
+        $loan->save();
+
+             // Update stok inventory
+        $inventory = Inventory::where('inventory_id', $loan->inventory_id)->first();
+        $inventory->total += $loan->quantity;
+        $inventory->status = 'Tersedia';
+        $inventory->save();
+
+        return redirect()->route('loans.returns')->with('success', 'Pengembalian berhasil');
+    }
 }

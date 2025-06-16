@@ -25,7 +25,8 @@
 <div class="sidebar">
     <h2><span style="color:#007bff">IT</span>Ventory</h2>
     <a href="{{ route('dashboard') }}" class="{{ request()->is('dashboard') ? 'active' : '' }}">Dashboard</a>
-    <a href="{{ route('loan-form') }}" class="{{ request()->is('loan-form') ? 'active' : '' }}">Loan Form</a>
+    <a href="{{ route('loans.create') }}" class="{{ request()->is('loans.create') ? 'active' : '' }}">Loan Form</a>
+    <a href="{{ route('loans.returns') }}" class="{{ request()->is('loans/returns') ? 'active' : '' }}">Pengembalian</a>
     <a href="{{ route('helpdesk') }}" class="{{ request()->is('helpdesk') ? 'active' : '' }}">Helpdesk</a>
 </div>
 

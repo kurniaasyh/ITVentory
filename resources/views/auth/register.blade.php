@@ -9,6 +9,28 @@
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
+        <!-- NIM -->
+<div class="mt-4">
+    <x-input-label for="nim" :value="__('NIM')" />
+    <x-text-input id="nim" class="block mt-1 w-full" type="text" name="nim" :value="old('nim')" />
+    <x-input-error :messages="$errors->get('nim')" class="mt-2" />
+</div>
+
+<!-- WhatsApp -->
+<div class="mt-4">
+    <x-input-label for="whatsapp" :value="__('WhatsApp')" />
+    <x-text-input id="whatsapp" class="block mt-1 w-full" type="text" name="whatsapp" :value="old('whatsapp')" />
+    <x-input-error :messages="$errors->get('whatsapp')" class="mt-2" />
+</div>
+
+<!-- Address -->
+<div class="mt-4">
+    <x-input-label for="address" :value="__('Address')" />
+    <textarea id="address" name="address" class="block mt-1 w-full rounded-md border-gray-300 shadow-sm">{{ old('address') }}</textarea>
+    <x-input-error :messages="$errors->get('address')" class="mt-2" />
+</div>
+
+
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />

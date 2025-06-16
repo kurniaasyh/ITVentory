@@ -15,5 +15,6 @@ class Loan extends Model
     {
         return $this->belongsTo(Inventory::class, 'inventory_id');
     }
+
 }
 
