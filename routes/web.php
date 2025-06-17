@@ -4,7 +4,19 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoanController;
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\InventoryController;
+use App\Http\Controllers\HistoryController;
 use App\Models\Inventory;
+
+
+// Group route dengan middleware Admin
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+
+    // Manajemen Inventaris
+    Route::resource('inventories', InventoryController::class);
+});
 
 // Route utama
 Route::get('/', function () {
@@ -28,6 +40,11 @@ Route::middleware(['auth'])->group(function () {
     // Returns
     Route::get('/loans/returns', [LoanController::class, 'returns'])->name('loans.returns');
     Route::post('/loans/return/{loan}', [LoanController::class, 'returnLoan'])->name('returnLoan');
+
+    // History
+    Route::middleware(['auth'])->group(function () {
+    Route::get('/history', [HistoryController::class, 'index'])->name('history.index');
+    });
 
     // Helpdesk dan profile
     Route::view('/helpdesk', 'helpdesk')->name('helpdesk');

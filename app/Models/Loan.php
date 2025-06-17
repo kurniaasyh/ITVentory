@@ -9,12 +9,13 @@ class Loan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['inventory_id', 'quantity', 'borrow_date', 'return_date', 'status'];
+    protected $fillable = ['user_id', 'inventory_id', 'quantity', 'borrow_date', 'return_date', 'status'];
+
 
     public function inventory()
-    {
-        return $this->belongsTo(Inventory::class, 'inventory_id');
-    }
-
+{
+    return $this->belongsTo(Inventory::class, 'inventory_id', 'inventory_id');
 }
 
+
+}

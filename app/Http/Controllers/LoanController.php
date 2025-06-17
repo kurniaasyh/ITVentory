@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Inventory;
 use App\Models\Loan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class LoanController extends Controller
 {
@@ -15,35 +17,36 @@ class LoanController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'inventory_id' => 'required|exists:inventories,inventory_id',
-            'quantity' => 'required|integer|min:1',
-            'borrow_date' => 'required|date',
-        ]);
+{
+    $request->validate([
+        'inventory_id' => 'required|exists:inventories,inventory_id',
+        'quantity' => 'required|integer|min:1',
+        'borrow_date' => 'required|date',
+    ]);
 
-        $inventory = Inventory::where('inventory_id', $request->inventory_id)->firstOrFail();
+    $inventory = Inventory::where('inventory_id', $request->inventory_id)->firstOrFail();
 
-        if ($inventory->total < $request->quantity) {
-            return back()->withErrors(['quantity' => 'Stok tidak mencukupi']);
-        }
-
-        Loan::create([
-            'inventory_id' => $request->inventory_id,
-            'quantity' => $request->quantity,
-            'borrow_date' => $request->borrow_date,
-            'status' => 'Dipinjam',
-        ]);
-
-        $inventory->total -= $request->quantity;
-        if ($inventory->total == 0) {
-            $inventory->status = 'Kosong';
-        }
-        $inventory->save();
-
-        return redirect()->route('loans.create')->with('success', 'Peminjaman berhasil');
-
+    if ($inventory->total < $request->quantity) {
+        return back()->withErrors(['quantity' => 'Stok tidak mencukupi']);
     }
+
+    Loan::create([
+        'user_id' => Auth::id(),
+        'inventory_id' => $request->inventory_id,
+        'quantity' => $request->quantity,
+        'borrow_date' => $request->borrow_date,
+        'status' => 'Dipinjam',
+    ]);
+
+    $inventory->total -= $request->quantity;
+    if ($inventory->total == 0) {
+        $inventory->status = 'Kosong';
+    }
+    $inventory->save();
+
+    return redirect()->route('loans.create')->with('success', 'Peminjaman berhasil');
+}
+
 
     // ⬇ Fungsi pengembalian
     public function returns()
@@ -53,21 +56,25 @@ class LoanController extends Controller
     }
 
     public function returnLoan(Request $request, Loan $loan)
-    {
-        $request->validate([
-            'return_date' => 'required|date',
-        ]);
+{
+    $request->validate([
+        'return_date' => 'required|date',
+    ]);
 
-        $loan->return_date = $request->return_date;
-        $loan->status = 'Dikembalikan';
-        $loan->save();
+    $loan->return_date = $request->return_date;
+    $loan->status = 'Dikembalikan';
+    $loan->save();
 
-             // Update stok inventory
-        $inventory = Inventory::where('inventory_id', $loan->inventory_id)->first();
+    // ✅ Cek apakah inventory-nya benar-benar ada
+    $inventory = Inventory::where('inventory_id', $loan->inventory_id)->first();
+
+    if ($inventory) {
         $inventory->total += $loan->quantity;
         $inventory->status = 'Tersedia';
         $inventory->save();
-
-        return redirect()->route('loans.returns')->with('success', 'Pengembalian berhasil');
     }
+
+    return redirect()->route('loans.returns')->with('success', 'Pengembalian berhasil');
+}
+
 }

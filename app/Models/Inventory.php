@@ -17,5 +17,11 @@ class Inventory extends Model
     {
         return $this->hasMany(Loan::class, 'inventory_id');
     }
+
+    public function getRouteKeyName()
+{
+    return 'inventory_id';
+}
+
 }
 
