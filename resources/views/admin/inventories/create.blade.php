@@ -1,38 +1,32 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container mt-5">
+<link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+
+<div class="container">
     <h2>Add New Item</h2>
 
     <form action="{{ route('admin.inventories.store') }}" method="POST">
         @csrf
 
-        <div class="form-group">
-            <label for="name">Item Name</label>
-            <input type="text" name="name" class="form-control" placeholder="Enter item name" required>
-        </div>
+        <label for="name">Item Name</label>
+        <input type="text" name="name" placeholder="Enter item name" required>
 
-        <div class="form-group mt-3">
-            <label for="code">Item Code</label>
-            <input type="text" name="code" class="form-control" placeholder="Enter item code" required>
-        </div>
+        <label for="code">Item Code</label>
+        <input type="text" name="code" placeholder="Enter item code" required>
 
-        <div class="form-group mt-3">
-            <label for="total">Total Quantity</label>
-            <input type="number" name="total" class="form-control" placeholder="Enter total quantity" required>
-        </div>
+        <label for="total">Total Quantity</label>
+        <input type="number" name="total" placeholder="Enter total quantity" required>
 
-        <div class="form-group mt-3">
-            <label for="status">Status</label>
-            <select name="status" class="form-control" required>
-                <option value="">-- Select Status --</option>
-                <option value="Tersedia">Tersedia</option>
-                <option value="Kosong">Kosong</option>
-            </select>
-        </div>
+        <label for="status">Status</label>
+        <select name="status" required>
+            <option value="">-- Select Status --</option>
+            <option value="Tersedia">Tersedia</option>
+            <option value="Kosong">Kosong</option>
+        </select>
 
-        <button type="submit" class="btn btn-primary mt-4">Save Item</button>
-        <a href="{{ route('admin.inventories.index') }}" class="btn btn-secondary mt-4">Cancel</a>
+        <button type="submit" class="btn btn-primary">Save Item</button>
+        <a href="{{ route('admin.inventories.index') }}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 @endsection

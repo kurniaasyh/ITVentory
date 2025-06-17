@@ -5,7 +5,7 @@
     <title>Admin - ITVentory</title>
     <style>
         body { margin: 0; font-family: Arial, sans-serif; background: linear-gradient(to bottom right, #f5faff, #cdddfc); }
-        .sidebar { width: 200px; height: 100vh; background: #dce7fb; padding: 20px; float: left; }
+        .sidebar { width: 200px; height: 100vh; background: linear-gradient(to left, #4a5cff, #90adff); padding: 20px; float: left; }
         .sidebar a { display: block; margin: 20px 0; color: #333; text-decoration: none; font-weight: bold; }
         .sidebar a.active { color: #0a3d91; }
         .topbar { padding: 20px; display: flex; justify-content: space-between; align-items: center; }
@@ -21,7 +21,7 @@
 <body>
 
 <div class="sidebar">
-    <h2><span style="color:#007bff">IT</span>Ventory</h2>
+    <h2><span style="color:#052950">IT</span><span style="color:#ffc107">Ventory</span></h2>
     <a href="{{ route('admin.dashboard') }}" class="{{ request()->is('admin/dashboard') ? 'active' : '' }}">Dashboard</a>
     <a href="{{ route('admin.inventories.index') }}" class="{{ request()->is('admin/inventories*') ? 'active' : '' }}">Management</a>
 </div>

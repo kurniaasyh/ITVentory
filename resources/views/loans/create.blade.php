@@ -1,18 +1,21 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="card" style="margin-top:40px;">
-    <h2>Form Peminjaman</h2>
+<link rel="stylesheet" href="{{ asset('css/user.css') }}">
+
+<div class="loan-form-container">
+    <h2>Inventory Loan Form</h2>
 
     @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+        <div class="success-message">{{ session('success') }}</div>
     @endif
 
-    <form action="{{ route('loans.store') }}" method="POST" style="margin-top: 24px;">
+    <form action="{{ route('loans.store') }}" method="POST">
         @csrf
-        <div style="margin-bottom: 12px;">
+
+        <div class="loan-form-group">
             <label>Nama Alat:</label>
-            <select name="inventory_id" class="form-control" required>
+            <select name="inventory_id" required>
                 @foreach ($inventories as $inventory)
                     <option value="{{ $inventory->inventory_id }}">
                         {{ $inventory->name }} (Stok: {{ $inventory->total }})
@@ -21,17 +24,17 @@
             </select>
         </div>
 
-        <div style="margin-bottom: 12px;">
+        <div class="loan-form-group">
             <label>Jumlah Pinjam:</label>
             <input type="number" name="quantity" min="1" required>
         </div>
 
-        <div style="margin-bottom: 12px;">
+        <div class="loan-form-group">
             <label>Tanggal Pinjam:</label>
             <input type="date" name="borrow_date" required>
         </div>
 
-        <button type="submit">Pinjam</button>
+        <button type="submit" class="submit-btn">Submit Form</button>
     </form>
 </div>
 @endsection

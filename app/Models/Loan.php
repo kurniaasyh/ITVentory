@@ -16,6 +16,10 @@ class Loan extends Model
 {
     return $this->belongsTo(Inventory::class, 'inventory_id', 'inventory_id');
 }
+public function user()
+{
+    return $this->belongsTo(User::class);
+}
 
 
 }

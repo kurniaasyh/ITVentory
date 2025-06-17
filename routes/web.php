@@ -23,7 +23,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Halaman statis
+// Menu Halaman utama
+Route::get('/auth', fn() => view('auth.login-register'))->name('auth.page')->middleware('guest');
 Route::view('/about', 'about');
 Route::view('/contact', 'contact');
 
