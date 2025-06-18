@@ -23,11 +23,11 @@
 
     <h4>Kontak Admin:</h4>
     <ul>
-        <li>Email: admin@itventory.ac.id</li>
+        <li>Email: admin@ITventory.ac.id</li>
         <li>WA: +62 8xx-xxxx-xxxx</li>
-        <li>Jam Operasional: Senin - Jumat (08:00 - 16:00)</li>
+        <li>Jam Kerja: Senin - Jumat (08:00 - 16:00)</li>
     </ul>
 
-    <p>Jika masih ada kendala, silakan hubungi admin atau datang langsung ke ruangan IT Fakultas.</p>
+    <p>Jika masih ada kendala, silakan hubungi admin atau datang langsung ke kantor Fakultas IT.</p>
 </div>
 @endsection

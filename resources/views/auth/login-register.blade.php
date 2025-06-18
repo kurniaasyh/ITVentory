@@ -49,7 +49,8 @@
         <input type="text" name="whatsapp" placeholder="No. WhatsApp" class="w-full mb-4 p-2 border rounded" value="{{ old('whatsapp') }}" />
         <textarea name="address" placeholder="Alamat" class="w-full mb-4 p-2 border rounded">{{ old('address') }}</textarea>
         <input type="email" name="email" placeholder="Email" class="w-full mb-4 p-2 border rounded" required value="{{ old('email') }}" />
-        <input type="password" name="password" placeholder="Password" class="w-full mb-4 p-2 border rounded" required />
+        <input type="password" name="password" id="reg-password" placeholder="Password" class="w-full mb-1 p-2 border rounded" required />
+          <p id="password-error" class="text-sm text-red-600 mb-3 hidden">Password harus minimal 8 karakter.</p>
         <input type="password" name="password_confirmation" placeholder="Konfirmasi Password" class="w-full mb-4 p-2 border rounded" required />
         <button type="submit" class="bg-green-600 text-white w-full p-2 rounded">Register</button>
       </form>
@@ -76,4 +77,17 @@
   </script>
 
 </body>
+<script>
+  const passwordInput = document.getElementById('reg-password');
+  const passwordError = document.getElementById('password-error');
+
+  passwordInput.addEventListener('input', function () {
+    if (this.value.length > 0 && this.value.length < 8) {
+      passwordError.classList.remove('hidden'); // Tampilkan pesan
+    } else {
+      passwordError.classList.add('hidden'); // Sembunyikan jika valid
+    }
+  });
+</script>
+
 </html>
