@@ -5,13 +5,17 @@ body {
     padding: 0;
 }
 
-.container {
+.card-container {
     max-width: 800px;
-    margin: 40px auto;
+    margin: 20px auto 0 auto;
     background: #fff;
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2, h3 {
+    margin-top: 0;
 }
 
 h2 {

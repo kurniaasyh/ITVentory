@@ -16,6 +16,22 @@
         .badge { padding: 5px 10px; border-radius: 10px; color: white; }
         .tersedia { background-color: #4dabf7; }
         .kosong { background-color: #e03131; }
+
+        button {
+            padding: 6px 14px;
+            border: none;
+            background-color: #4f46e5;
+            color: white;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+        background-color: #3730a3;
+        }
+
     </style>
 </head>
 <body>

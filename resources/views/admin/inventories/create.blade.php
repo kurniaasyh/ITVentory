@@ -3,7 +3,7 @@
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 
-<div class="container">
+<div class="card-container">
     <h2>Add New Item</h2>
 
     <form action="{{ route('admin.inventories.store') }}" method="POST">
@@ -28,5 +28,6 @@
         <button type="submit" class="btn btn-primary">Save Item</button>
         <a href="{{ route('admin.inventories.index') }}" class="btn btn-secondary">Cancel</a>
     </form>
+    
 </div>
 @endsection

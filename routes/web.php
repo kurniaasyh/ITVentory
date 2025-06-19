@@ -7,8 +7,8 @@ use App\Http\Controllers\LoanController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\Admin\ExportController;
 use App\Models\Inventory;
-
 
 // Group route dengan middleware Admin
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
@@ -17,6 +17,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     // Manajemen Inventaris
     Route::resource('inventories', InventoryController::class);
 });
+
+//download export
+Route::get('/admin/export-loans', [ExportController::class, 'export'])->name('admin.loans.export');
 
 // Route utama
 Route::get('/', function () {

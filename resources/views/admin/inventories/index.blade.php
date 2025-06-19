@@ -6,8 +6,10 @@
 <div class="container">
     <h2>Inventory Management</h2>
 
-    <a href="{{ route('admin.inventories.create') }}">+ Add New Item</a>
-
+    <a href="{{ route('admin.inventories.create') }}">
+        <button style="margin-bottom: 10px;" class="btn btn-primary">+ Add New Item</button>
+    </a>
+    <a href="{{ route('admin.loans.export') }}" class="btn btn-primary">Download Excel</a>
     <div class="table-container">
         <table>
             <thead>
@@ -24,12 +26,14 @@
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->total }}</td>
                     <td>{{ $item->status }}</td>
-                    <td>
-                        <a href="{{ route('admin.inventories.edit', $item->inventory_id) }}">Edit</a>
-                        <form action="{{ route('admin.inventories.destroy', $item->inventory_id) }}" method="POST" style="display:inline;">
+                    <td style="display: flex; gap: 8px; justify-content: center;">
+                        <a href="{{ route('admin.inventories.edit', $item->inventory_id) }}">
+                            <button class="btn btn-primary">Edit</button>
+                        </a>
+                        <form action="{{ route('admin.inventories.destroy', $item->inventory_id) }}" method="POST" onsubmit="return confirm('Delete this item?')">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" onclick="return confirm('Delete this item?')">Delete</button>
+                            <button type="submit" class="btn btn-secondary">Delete</button>
                         </form>
                     </td>
                 </tr>

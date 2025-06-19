@@ -3,7 +3,7 @@
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 
-<div class="container">
+<div class="card-container">
     <h2>Riwayat Peminjaman Terbaru</h2>
 
     <div class="table-container">
