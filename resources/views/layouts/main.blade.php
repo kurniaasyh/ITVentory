@@ -48,16 +48,32 @@
 <div class="container">
     <div class="topbar">
         <div></div>
-        <div style="display: flex; align-items: center; gap: 8px;">
-            <span>{{ Auth::user()->name }}</span>
-            <form action="{{ route('profile.edit') }}" method="GET" style="display:inline;">
-                <button type="submit">Profile</button>
-            </form>
-            <form method="POST" action="{{ route('logout') }}" style="display:inline;">
-                @csrf
-                <button type="submit">Logout</button>
-            </form>
-        </div>
+        @php
+    use App\Models\Notification;
+    $notifCount = Notification::where('user_id', Auth::id())->where('is_read', false)->count();
+@endphp
+
+<div style="display: flex; align-items: center; gap: 12px;">
+    <!-- 🔔 Notifikasi -->
+    <a href="{{ route('notifications.index') }}" style="position: relative; text-decoration: none;">
+        <span style="font-size: 18px;">🔔</span>
+        @if($notifCount > 0)
+            <span style="position: absolute; top: -6px; right: -6px; background: red; color: white; border-radius: 50%; padding: 2px 6px; font-size: 11px;">
+                {{ $notifCount }}
+            </span>
+        @endif
+    </a>
+
+    <span>{{ Auth::user()->name }}</span>
+    <form action="{{ route('profile.edit') }}" method="GET" style="display:inline;">
+        <button type="submit">Profile</button>
+    </form>
+    <form method="POST" action="{{ route('logout') }}" style="display:inline;">
+        @csrf
+        <button type="submit">Logout</button>
+    </form>
+</div>
+
     </div>
 
     @yield('content')

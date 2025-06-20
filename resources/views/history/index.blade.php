@@ -19,9 +19,36 @@
     <td>{{ $history->borrow_date ?? '-' }}</td>
     <td>{{ $history->return_date ?? '-' }}</td>
     <td>
-        <span class="badge {{ $history->status == 'Dipinjam' ? 'tersedia' : 'kosong' }}">
-            {{ $history->status }}
-        </span>
+        @php
+            $status = $history->status;
+            $badgeClass = 'kosong'; // default
+
+            switch ($status) {
+                case 'Disetujui':
+                    $badgeClass = 'tersedia';
+                    $statusText = 'Disetujui - Dipinjam';
+                    break;
+                case 'Dipinjam':
+                    $badgeClass = 'tersedia';
+                    $statusText = 'Menunggu Persetujuan';
+                    break;
+                case 'Ditolak':
+                    $badgeClass = 'kosong';
+                    $statusText = 'Ditolak';
+                    break;
+                case 'Dikembalikan':
+                    $badgeClass = 'tersedia';
+                    $statusText = 'Dikembalikan';
+                    break;
+                default:
+                    $statusText = $status;
+            }
+        @endphp
+
+<span class="badge {{ $badgeClass }}">
+    {{ $statusText }}
+</span>
+
     </td>
 </tr>
 @endforeach

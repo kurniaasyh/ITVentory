@@ -26,7 +26,19 @@
                     <td>{{ $loan->quantity }}</td>
                     <td>{{ $loan->borrow_date }}</td>
                     <td>{{ $loan->return_date ?? '-' }}</td>
-                    <td>{{ $loan->status }}</td>
+                    <td>
+                        @if ($loan->status === 'Disetujui')
+                            Disetujui - Dipinjam
+                        @elseif ($loan->status === 'Dipinjam')
+                            Menunggu Persetujuan
+                        @elseif ($loan->status === 'Ditolak')
+                            Ditolak
+                        @elseif ($loan->status === 'Dikembalikan')
+                            Dikembalikan
+                        @else
+                        {{ $loan->status }}
+                        @endif
+                    </td>
                 </tr>
                 @empty
                 <tr>

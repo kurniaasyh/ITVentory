@@ -39,22 +39,38 @@
     <h2><span style="color:#052950">IT</span><span style="color:#ffc107">Ventory</span></h2>
     <a href="{{ route('admin.dashboard') }}" class="{{ request()->is('admin/dashboard') ? 'active' : '' }}">Dashboard</a>
     <a href="{{ route('admin.inventories.index') }}" class="{{ request()->is('admin/inventories*') ? 'active' : '' }}">Management</a>
+    <a href="{{ route('admin.approvals') }}" class="{{ request()->is('admin/approvals') ? 'active' : '' }}">Persetujuan</a>
 </div>
 
 <div class="container">
     <div class="topbar">
-        <div><b>Admin Panel</b></div>
-        <div style="display: flex; align-items: center; gap: 8px;">
-            <span>{{ Auth::user()->name }}</span>
-            <form action="{{ route('profile.edit') }}" method="GET" style="display:inline;">
-                <button type="submit">Profile</button>
-            </form>
-            <form method="POST" action="{{ route('logout') }}" style="display:inline;">
-                @csrf
-                <button type="submit">Logout</button>
-            </form>
-        </div>
+    <div><b>Admin Panel</b></div>
+    <div style="display: flex; align-items: center; gap: 12px;">
+        <!-- 🔔 Notifikasi -->
+        <a href="{{ route('admin.notifications') }}" style="position: relative; text-decoration: none;">
+            <span style="font-size: 20px;">🔔</span>
+            @php
+                use App\Models\Notification;
+                $notifCount = Notification::where('role_tujuan', 'admin')->where('is_read', false)->count();
+            @endphp
+            @if($notifCount > 0)
+                <span style="position: absolute; top: -8px; right: -8px; background: red; color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px;">
+                    {{ $notifCount }}
+                </span>
+            @endif
+        </a>
+
+        <span>{{ Auth::user()->name }}</span>
+        <form action="{{ route('profile.edit') }}" method="GET" style="display:inline;">
+            <button type="submit">Profile</button>
+        </form>
+        <form method="POST" action="{{ route('logout') }}" style="display:inline;">
+            @csrf
+            <button type="submit">Logout</button>
+        </form>
     </div>
+</div>
+
 
     @yield('content')
 </div>

@@ -9,6 +9,20 @@ use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\Admin\ExportController;
 use App\Models\Inventory;
+use App\Http\Controllers\UserNotificationController;
+
+// Route notifikasi untuk halaman admin
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/approvals', [LoanController::class, 'approvalIndex'])->name('admin.approvals');
+    Route::post('/admin/approvals/{loan}/approve', [LoanController::class, 'approve'])->name('admin.approve');
+    Route::post('/admin/approvals/{loan}/reject', [LoanController::class, 'reject'])->name('admin.reject');
+    Route::get('/admin/notifications', [AdminDashboardController::class, 'notifications'])->name('admin.notifications');
+});
+
+// Route notifikasi untuk user
+Route::middleware(['auth'])->group(function () {
+    Route::get('/notifications', [UserNotificationController::class, 'index'])->name('notifications.index');
+});
 
 // Group route dengan middleware Admin
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
