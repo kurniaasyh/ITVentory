@@ -10,17 +10,16 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up()
-{
-    Schema::table('users', function (Blueprint $table) {
-        $table->boolean('is_admin')->default(false);
-    });
-}
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->boolean('is_admin')->default(false);
+        });
+    }
 
-public function down()
-{
-    Schema::table('users', function (Blueprint $table) {
-        $table->dropColumn('is_admin');
-    });
-}
-
+    public function down()
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('is_admin');
+        });
+    }
 };

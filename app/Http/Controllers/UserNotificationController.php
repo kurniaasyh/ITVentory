@@ -10,8 +10,8 @@ class UserNotificationController extends Controller
     public function index()
     {
         $notifications = Notification::where('user_id', Auth::id())
-                                     ->orderBy('created_at', 'desc')
-                                     ->get();
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         // Mark notifications as read
         Notification::where('user_id', Auth::id())

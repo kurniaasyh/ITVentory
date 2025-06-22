@@ -54,22 +54,22 @@ Route::middleware(['auth'])->group(function () {
     // Loans
     Route::get('/loans/create', [LoanController::class, 'create'])->name('loans.create');
     Route::post('/loans/store', [LoanController::class, 'store'])->name('loans.store');
-    
+
     // Returns
     Route::get('/loans/returns', [LoanController::class, 'returns'])->name('loans.returns');
     Route::post('/loans/return/{loan}', [LoanController::class, 'returnLoan'])->name('returnLoan');
 
     // History
     Route::middleware(['auth'])->group(function () {
-    Route::get('/history', [HistoryController::class, 'index'])->name('history.index');
+        Route::get('/history', [HistoryController::class, 'index'])->name('history.index');
     });
 
     // Helpdesk dan profile
     Route::view('/helpdesk', 'helpdesk')->name('helpdesk');
-    
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

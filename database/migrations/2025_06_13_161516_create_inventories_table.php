@@ -12,18 +12,17 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up()
-{
-    // inventories migration
-    Schema::create('inventories', function (Blueprint $table) {
-        $table->id('inventory_id'); // primary key diubah
-        $table->string('name');
-        $table->string('code');
-        $table->integer('total');
-        $table->string('status');
-        $table->timestamps();
-    });
-
-}
+    {
+        // inventories migration
+        Schema::create('inventories', function (Blueprint $table) {
+            $table->id('inventory_id'); // primary key diubah
+            $table->string('name');
+            $table->string('code');
+            $table->integer('total');
+            $table->string('status');
+            $table->timestamps();
+        });
+    }
 
 
     /**

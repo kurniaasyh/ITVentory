@@ -13,13 +13,11 @@ class Loan extends Model
 
 
     public function inventory()
-{
-    return $this->belongsTo(Inventory::class, 'inventory_id', 'inventory_id');
-}
-public function user()
-{
-    return $this->belongsTo(User::class);
-}
-
-
+    {
+        return $this->belongsTo(Inventory::class, 'inventory_id', 'inventory_id');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

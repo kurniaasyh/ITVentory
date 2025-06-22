@@ -19,13 +19,11 @@ class Inventory extends Model
     }
 
     public function getRouteKeyName()
-{
-    return 'inventory_id';
+    {
+        return 'inventory_id';
+    }
+    public function inventory()
+    {
+        return $this->belongsTo(Inventory::class, 'inventory_id');
+    }
 }
-public function inventory()
-{
-    return $this->belongsTo(Inventory::class, 'inventory_id');
-}
-
-}
-

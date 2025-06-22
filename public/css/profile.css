@@ -10,7 +10,7 @@ body {
     background-color: #2d3748;
     color: white;
     padding: 10px 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .navbar .container {
@@ -55,7 +55,7 @@ body {
 .page-header {
     padding: 20px;
     background-color: white;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
     margin-bottom: 20px;
     text-align: center;
 }
@@ -72,7 +72,7 @@ body {
     background: #ffffff;
     padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .profile-container h2 {

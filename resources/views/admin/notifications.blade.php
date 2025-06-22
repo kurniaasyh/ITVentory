@@ -3,7 +3,7 @@
 @section('content')
     <h2>Notifikasi Admin</h2>
 
-    @if($notifications->isEmpty())
+    @if ($notifications->isEmpty())
         <p>Tidak ada notifikasi.</p>
     @else
         <ul>

@@ -12,18 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         // loans migration
-    Schema::create('loans', function (Blueprint $table) {
-        $table->id();
-        $table->unsignedBigInteger('inventory_id');
-        $table->integer('quantity');
-        $table->date('borrow_date');
-        $table->date('return_date')->nullable();
-        $table->string('status');
-        $table->timestamps();
+        Schema::create('loans', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('inventory_id');
+            $table->integer('quantity');
+            $table->date('borrow_date');
+            $table->date('return_date')->nullable();
+            $table->string('status');
+            $table->timestamps();
 
-        $table->foreign('inventory_id')->references('inventory_id')->on('inventories')->onDelete('cascade');
-    });
-
+            $table->foreign('inventory_id')->references('inventory_id')->on('inventories')->onDelete('cascade');
+        });
     }
 
     /**
